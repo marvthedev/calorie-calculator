@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/calorie.css">
+    <title>Calorie Calculator</title>
+</head>
+
+<body>
+    <div class="flex-container">
+        <section class="input-box">
+            <h1>Goal Specific Calorie Calculator</h1>
+            <div class="gender-box">
+                <h2>Gender</h2>
+                <div id="gender">
+                    <label><input type="radio" id="female" value="female" name="gender">Female</label>
+                    <label><input type="radio" id="male" value="male" name="gender">Male</label>
+                </div>
+            </div>
+            <div class="height-box">
+                <form id="height-select">
+                    <h2>Height</h2>
+                    <label><input type="radio" id="height-inches" value="female" name="height" checked> Feet & Inches</label>
+                    <label><input type="radio" id="height-cm" value="male" name="height"> CMs</label>
+                </form>
+                <form class="height-input">
+                    <label class="height-label">Feet <input type="text" id="feet" name="feet"></label>
+                    <label class="height-label">Inches <input type="text" id="inches" name="inches"></label>
+                </form>
+            </div>
+            <a href="#" class="calc-btn">Calculate</a>
+        </section>
+        <section class="results-box">
+
+        </section>
+    </div>
+    <script src="assets/js/calorie.js"></script>
+</body>
+
+</html>
