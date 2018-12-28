@@ -6,7 +6,7 @@ const heightInches = document.getElementById("inches");
 const height = document.getElementsByName('height');
 const heightInput = document.getElementsByClassName('height-input');
 const heightLabel = document.getElementsByClassName('height-label');
-
+const cmInput = document.getElementById('cm');
 
 //Height Global Variables
 let heightCM;
@@ -28,43 +28,29 @@ function convertToKg() {
 }
 
 //Convert height if it's not in cm
-function convertToCm() {
+function feetInchToCm() {
     // Convert feet input to inches and convert to number type
     feetToInches = heightFeet.value * 12;
     
     // Combine feet input and inches input together to get total inches
     totalInches = Number(feetToInches) + Number(heightInches.value);
     inchesToCm = totalInches * 2.54;
-    heightCM = inchesToCm;
+    //Places the converted inches to the cm input box
 }
 
 // Display height input boxes based on radio selection
 function selectHeight() {
     if(height[0].checked) {
-        heightInput[0].removeChild(heightLabel[2]);
         heightLabel[0].style.display = '';
         heightLabel[1].style.display = '';
+        heightLabel[2].style.display = 'none';
+        heightCM = inchesToCm;
     } else if(height[1].checked) {
-        //Hide feet and inches input
+        //Hide feet and inches input and display CM inputs
         heightLabel[0].style.display = 'none';
         heightLabel[1].style.display = 'none';
-        //Remove feet and inches input
-        console.log("Height input status: " + heightInput);
-        //Create label for new input
-        const newLabel = document.createElement('label');
-        newLabel.className = 'height-label';
-        newLabel.id = 'height-label-cm';
-        newLabel.innerHTML = 'CMs '
-        //Create new input for CMs
-        const newInput = document.createElement('input');
-        newInput.type = 'text';
-        newInput.id = 'cm';
-        // append new input to the label
-        newLabel.appendChild(newInput);
-        // append label and input box to form
-        heightInput[0].appendChild(newLabel);
-        console.log(heightInput);
-        //replace child 
+        heightLabel[2].style.display = 'block';
+        heightCM = cmInput.value;
     }
 }
 
@@ -79,11 +65,14 @@ function loadEventListeners() {
 
 //Formula to calculate BMR based on gender
 function calcByGender(e) {
-    convertToCm();
+    feetInchToCm()
+    selectHeight();
     if(gender[0].checked) {
         calcBMR = (9.99 * weightKilos) + (6.25 * heightCM) - (4.92 * age) - 161;
     } else if(gender[1].checked) {
         calcBMR = (9.99 * weightKilos) + (6.25 * heightCM) - (4.92 * age) + 5;
+    } else if(gender[0].checked != true && gender[1].checked != true) {
+        alert('Please select gender!');
     }
 }
 

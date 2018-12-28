@@ -24,14 +24,26 @@
             <div class="height-box">
                 <form id="height-select">
                     <h2>Height</h2>
-                    <label><input type="radio" id="height-inches" value="female" name="height" checked> Feet & Inches</label>
-                    <label><input type="radio" id="height-cm" value="male" name="height"> CMs</label>
+                    <label><input type="radio" id="height-inches" name="height" checked> Feet & Inches</label>
+                    <label><input type="radio" id="height-cm" name="height"> CMs</label>
                 </form>
                 <form class="height-input">
                     <label class="height-label">Feet <input type="text" id="feet" name="feet"></label>
                     <label class="height-label">Inches <input type="text" id="inches" name="inches"></label>
+                    <label class="height-label" id="cm-label">CMs <input type="text" id="cm" name="cm"></label>
                 </form>
             </div>
+            <div class="weight-box">
+                    <form id="weight-select">
+                        <h2>Weight</h2>
+                        <label><input type="radio" id="weight-kg" name="weight" checked> Kilos</label>
+                        <label><input type="radio" id="weight-lbs" name="weight"> Pounds</label>
+                    </form>
+                    <form class="weight-input">
+                        <label class="weight-label">KG <input type="text" id="feet" name="feet" checked></label>
+                        <label class="weight-label" id='lbs-label'>Lbs. <input type="text" id="inches" name="inches"></label>
+                    </form>
+                </div>
             <a href="#" class="calc-btn">Calculate</a>
         </section>
         <section class="results-box">

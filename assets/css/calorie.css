@@ -46,18 +46,22 @@ h2 {
 /* GENDER SELECTION */
 .gender-box,
 .height-box,
-#height-select {
+.weight-box,
+#height-select,
+#weight-select {
     display: flex;
     align-items: center;
     margin-top: 10px;
 }
 
-.height-box {
+.height-box,
+.weight-box {
     flex-direction: column;
 }
 
 /* Style input boxes */
-.height-input input {
+.height-input input,
+.weight-input input {
     width: 50px;
     text-align: center;
 }
@@ -67,8 +71,14 @@ h2 {
 }
 
 .gender-box label,
-.height-box label {
+.height-box label,
+.weight-box label {
     padding: 0 5px;
+}
+
+#cm-label,
+#lbs-label {
+    display: none;
 }
 
 /* BUTTONS */
