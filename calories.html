@@ -21,6 +21,10 @@
                     <label><input type="radio" id="male" value="male" name="gender">Male</label>
                 </div>
             </div>
+            <form class="age-box">
+                <h2>Age</h2>
+                <input type="text" id="age-input">
+            </form>
             <div class="height-box">
                 <form id="height-select">
                     <h2>Height</h2>
@@ -34,20 +38,23 @@
                 </form>
             </div>
             <div class="weight-box">
-                    <form id="weight-select">
-                        <h2>Weight</h2>
-                        <label><input type="radio" id="weight-kg" name="weight" checked> Kilos</label>
-                        <label><input type="radio" id="weight-lbs" name="weight"> Pounds</label>
-                    </form>
-                    <form class="weight-input">
-                        <label class="weight-label">KG <input type="text" id="kg" checked></label>
-                        <label class="weight-label" id='lbs-label'>Lbs. <input type="text" id="lbs"></label>
-                    </form>
-                </div>
-            <a href="#" class="calc-btn">Calculate</a>
+                <form id="weight-select">
+                    <h2>Weight</h2>
+                    <label><input type="radio" id="weight-kg" name="weight" checked> Kilos</label>
+                    <label><input type="radio" id="weight-lbs" name="weight"> Pounds</label>
+                </form>
+                <form class="weight-input">
+                    <label class="weight-label">KG <input type="text" id="kg"></label>
+                    <label class="weight-label" id='lbs-label'>Lbs. <input type="text" id="lbs"></label>
+                </form>
+                <a href="#" class="calc-btn">Calculate</a>
+            </div>
         </section>
         <section class="results-box">
-
+            <h2>Results</h2>
+            <form class="results">
+                <label>BMR <input type="text" id="bmr-input"></label>
+            </form>
         </section>
     </div>
     <script src="assets/js/calorie.js"></script>

@@ -22,6 +22,8 @@ h1 {
 
 h2 {
     margin-right: 10px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
 
@@ -30,10 +32,11 @@ h2 {
     flex-direction: column;
     margin-top: 10px;
     align-items: center;
-    width: 100%;
 }
 
-.input-box {
+.input-box,
+.results-box {
+    width: 90%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -44,15 +47,21 @@ h2 {
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.15);
     margin-bottom: 20px;
 }
-/* GENDER SELECTION */
+
+
 .gender-box,
-.height-box,
 .weight-box,
+.age-box,
 #height-select,
 #weight-select {
     display: flex;
     align-items: center;
     margin-top: 10px;
+}
+
+.height-box {
+    display: flex;
+    align-items: center;
 }
 
 .height-box,
@@ -62,7 +71,8 @@ h2 {
 
 /* Style input boxes */
 .height-input input,
-.weight-input input {
+.weight-input input,
+#age-input {
     width: 50px;
     text-align: center;
 }
@@ -89,4 +99,11 @@ h2 {
     background: red;
     text-decoration: none;
     margin-top: 50px;
+}
+
+/* ################# RESULTS ################# */
+#bmr-input {
+    margin-top: 10px;
+    width: 80px;
+    text-align: center;
 }

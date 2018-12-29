@@ -11,9 +11,8 @@ const weightLabel = document.getElementsByClassName('weight-label');
 const weightKg = document.getElementById('kg');
 const lbsInput = document.getElementById('lbs');
 const weight = document.getElementsByName('weight');
-
-console.log(weightLabel[1]);
-
+const ageInput = document.getElementById('age-input');
+const bmrInput = document.getElementById('bmr-input');
 
 //Height Global Variables
 let heightCM;
@@ -25,7 +24,7 @@ let toNumb;
 //Weight Global Variables
 let poundsToKilos;
 let weightKilos;
-let age = 30;
+const age = ageInput.value;
 let calcBMR;
 
 // Load event listeners
@@ -43,7 +42,7 @@ function feetInchToCm() {
 
 //Convert height to kg
 function lbsToKg() {
-    poundsToKilos = lbsInput.value / 2.2;
+    poundsToKilos = lbsInput.value / 2.205;
 }
 
 // Display height input boxes based on radio selection
@@ -52,13 +51,13 @@ function selectHeight() {
         heightLabel[0].style.display = '';
         heightLabel[1].style.display = '';
         heightLabel[2].style.display = 'none';
-        heightCM = Math.round(inchesToCm);
+        heightCM = inchesToCm;
     } else if(height[1].checked) {
         //Hide feet and inches input and display CM inputs
         heightLabel[0].style.display = 'none';
         heightLabel[1].style.display = 'none';
         heightLabel[2].style.display = 'block';
-        heightCM = Math.round(cmInput.value);
+        heightCM = cmInput.value;
     }
 }
 
@@ -68,12 +67,12 @@ function selectWeight() {
         //Hide Kilos pounds input and show kilos input 
         weightLabel[0].style.display = '';
         weightLabel[1].style.display = 'none';
-        weightKilos = Math.round(weightKg.value);
+        weightKilos = weightKg.value;
     } else if(weight[1].checked) {
         //Hide Kilos input and display Pounds input
         weightLabel[0].style.display = 'none';
         weightLabel[1].style.display = 'block';
-        weightKilos = Math.round(poundsToKilos);
+        weightKilos = poundsToKilos;
     }
 }
 
@@ -98,8 +97,6 @@ function calcByGender(e) {
         calcBMR = (9.99 * weightKilos) + (6.25 * heightCM) - (4.92 * age) - 161;
     } else if(gender[1].checked) {
         calcBMR = (9.99 * weightKilos) + (6.25 * heightCM) - (4.92 * age) + 5;
-    } else if(gender[0].checked != true && gender[1].checked != true) {
-        alert('Please select gender!');
     }
 }
 
@@ -107,9 +104,11 @@ function calcByGender(e) {
 //Display calculated BMR when button is clicked
 function calculate() {
     calcByGender();
-    console.log("Feet to inches " + feetToInches);
-    console.log("Total inches " + totalInches);
-    console.log("Inches to CMs " + inchesToCm);
-    console.log("Height in CMs " + heightCM);
+    bmrInput.value = Math.round(calcBMR);
     console.log("Your weight in kilos is " + weightKilos);
+    console.log("Your weight in pounds is " + lbsInput.value)
+    console.log("Your height in cm " + heightCM);
+    console.log("Your height in inches " + totalInches);
+    console.log("Your age is " + ageInput.value);
+    console.log("Your BMR is " + Math.round(calcBMR));
 }
