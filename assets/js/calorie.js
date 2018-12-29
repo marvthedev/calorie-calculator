@@ -1,4 +1,4 @@
-//Declare Global Variables
+//Declare DOM variables
 const gender = document.getElementsByName('gender');
 const calcButton = document.querySelector('.calc-btn');
 const heightFeet = document.getElementById("feet");
@@ -7,6 +7,13 @@ const height = document.getElementsByName('height');
 const heightInput = document.getElementsByClassName('height-input');
 const heightLabel = document.getElementsByClassName('height-label');
 const cmInput = document.getElementById('cm');
+const weightLabel = document.getElementsByClassName('weight-label');
+const weightKg = document.getElementById('kg');
+const lbsInput = document.getElementById('lbs');
+const weight = document.getElementsByName('weight');
+
+console.log(weightLabel[1]);
+
 
 //Height Global Variables
 let heightCM;
@@ -15,17 +22,14 @@ let totalInches;
 let inchesToCm;
 let toNumb;
 
+//Weight Global Variables
+let poundsToKilos;
 let weightKilos;
 let age = 30;
 let calcBMR;
 
 // Load event listeners
 loadEventListeners();
-
-//Convert weight if it's not in kg
-function convertToKg() {
-
-}
 
 //Convert height if it's not in cm
 function feetInchToCm() {
@@ -35,7 +39,11 @@ function feetInchToCm() {
     // Combine feet input and inches input together to get total inches
     totalInches = Number(feetToInches) + Number(heightInches.value);
     inchesToCm = totalInches * 2.54;
-    //Places the converted inches to the cm input box
+}
+
+//Convert height to kg
+function lbsToKg() {
+    poundsToKilos = lbsInput.value / 2.2;
 }
 
 // Display height input boxes based on radio selection
@@ -44,13 +52,28 @@ function selectHeight() {
         heightLabel[0].style.display = '';
         heightLabel[1].style.display = '';
         heightLabel[2].style.display = 'none';
-        heightCM = inchesToCm;
+        heightCM = Math.round(inchesToCm);
     } else if(height[1].checked) {
         //Hide feet and inches input and display CM inputs
         heightLabel[0].style.display = 'none';
         heightLabel[1].style.display = 'none';
         heightLabel[2].style.display = 'block';
-        heightCM = cmInput.value;
+        heightCM = Math.round(cmInput.value);
+    }
+}
+
+// Display weight input boxes based on radio selection
+function selectWeight() {
+    if(weight[0].checked) {
+        //Hide Kilos pounds input and show kilos input 
+        weightLabel[0].style.display = '';
+        weightLabel[1].style.display = 'none';
+        weightKilos = Math.round(weightKg.value);
+    } else if(weight[1].checked) {
+        //Hide Kilos input and display Pounds input
+        weightLabel[0].style.display = 'none';
+        weightLabel[1].style.display = 'block';
+        weightKilos = Math.round(poundsToKilos);
     }
 }
 
@@ -60,13 +83,17 @@ function loadEventListeners() {
     gender[1].addEventListener('click' , calcByGender);
     height[0].addEventListener('click' , selectHeight);
     height[1].addEventListener('click' , selectHeight);
+    weight[0].addEventListener('click' , selectWeight);
+    weight[1].addEventListener('click' , selectWeight);
     calcButton.addEventListener('click', calculate);
 }
 
 //Formula to calculate BMR based on gender
 function calcByGender(e) {
-    feetInchToCm()
+    feetInchToCm();
+    lbsToKg();
     selectHeight();
+    selectWeight();
     if(gender[0].checked) {
         calcBMR = (9.99 * weightKilos) + (6.25 * heightCM) - (4.92 * age) - 161;
     } else if(gender[1].checked) {
@@ -84,4 +111,5 @@ function calculate() {
     console.log("Total inches " + totalInches);
     console.log("Inches to CMs " + inchesToCm);
     console.log("Height in CMs " + heightCM);
+    console.log("Your weight in kilos is " + weightKilos);
 }
