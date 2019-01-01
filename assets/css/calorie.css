@@ -56,17 +56,28 @@ h2 {
 #weight-select {
     display: flex;
     align-items: center;
-    margin-top: 10px;
-}
-
-.height-box {
-    display: flex;
-    align-items: center;
+    margin-top: 20px;
 }
 
 .height-box,
-.weight-box {
+.activity-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.height-box,
+.weight-box,
+.activity-box {
     flex-direction: column;
+}
+
+.activity-box {
+    margin-top: 30px;
+}
+
+.activity-box h2 {
+    margin-bottom: 10px;
 }
 
 /* Style input boxes */
@@ -92,6 +103,12 @@ h2 {
     display: none;
 }
 
+.goal-box {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
 /* BUTTONS */
 .calc-btn {
     padding: 20px 20px;
@@ -102,8 +119,24 @@ h2 {
 }
 
 /* ################# RESULTS ################# */
-#bmr-input {
+.results-box h2 {
+    font-size: 1.5rem;
+}
+
+#bmr-input,
+#tdee-input {
     margin-top: 10px;
     width: 80px;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.tdee-result,
+.goal-result {
+    margin-top: 20px;
     text-align: center;
 }

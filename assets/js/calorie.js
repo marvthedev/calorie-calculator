@@ -13,6 +13,7 @@ const lbsInput = document.getElementById('lbs');
 const weight = document.getElementsByName('weight');
 const ageInput = document.getElementById('age-input');
 const bmrInput = document.getElementById('bmr-input');
+const goalSelect = document.getElementById('goal-select');
 
 //Height Global Variables
 let heightCM;
@@ -27,6 +28,8 @@ let weightKilos;
 const age = ageInput.value;
 let calcBMR;
 
+//Additional calories to be added to total calories
+
 // Load event listeners
 loadEventListeners();
 
@@ -34,7 +37,7 @@ loadEventListeners();
 function feetInchToCm() {
     // Convert feet input to inches and convert to number type
     feetToInches = heightFeet.value * 12;
-    
+
     // Combine feet input and inches input together to get total inches
     totalInches = Number(feetToInches) + Number(heightInches.value);
     inchesToCm = totalInches * 2.54;
@@ -47,12 +50,12 @@ function lbsToKg() {
 
 // Display height input boxes based on radio selection
 function selectHeight() {
-    if(height[0].checked) {
+    if (height[0].checked) {
         heightLabel[0].style.display = '';
         heightLabel[1].style.display = '';
         heightLabel[2].style.display = 'none';
         heightCM = inchesToCm;
-    } else if(height[1].checked) {
+    } else if (height[1].checked) {
         //Hide feet and inches input and display CM inputs
         heightLabel[0].style.display = 'none';
         heightLabel[1].style.display = 'none';
@@ -63,12 +66,12 @@ function selectHeight() {
 
 // Display weight input boxes based on radio selection
 function selectWeight() {
-    if(weight[0].checked) {
+    if (weight[0].checked) {
         //Hide Kilos pounds input and show kilos input 
         weightLabel[0].style.display = '';
         weightLabel[1].style.display = 'none';
         weightKilos = weightKg.value;
-    } else if(weight[1].checked) {
+    } else if (weight[1].checked) {
         //Hide Kilos input and display Pounds input
         weightLabel[0].style.display = 'none';
         weightLabel[1].style.display = 'block';
@@ -78,13 +81,14 @@ function selectWeight() {
 
 // Function to load event listeners
 function loadEventListeners() {
-    gender[0].addEventListener('click' , calcByGender);
-    gender[1].addEventListener('click' , calcByGender);
-    height[0].addEventListener('click' , selectHeight);
-    height[1].addEventListener('click' , selectHeight);
-    weight[0].addEventListener('click' , selectWeight);
-    weight[1].addEventListener('click' , selectWeight);
+    gender[0].addEventListener('click', calcByGender);
+    gender[1].addEventListener('click', calcByGender);
+    height[0].addEventListener('click', selectHeight);
+    height[1].addEventListener('click', selectHeight);
+    weight[0].addEventListener('click', selectWeight);
+    weight[1].addEventListener('click', selectWeight);
     calcButton.addEventListener('click', calculate);
+    goalSelect.addEventListener('change', goalChanger);
 }
 
 //Formula to calculate BMR based on gender
@@ -93,13 +97,22 @@ function calcByGender(e) {
     lbsToKg();
     selectHeight();
     selectWeight();
-    if(gender[0].checked) {
+    if (gender[0].checked) {
         calcBMR = (9.99 * weightKilos) + (6.25 * heightCM) - (4.92 * age) - 161;
-    } else if(gender[1].checked) {
+    } else if (gender[1].checked) {
         calcBMR = (9.99 * weightKilos) + (6.25 * heightCM) - (4.92 * age) + 5;
     }
 }
 
+function goalChanger() {
+    if (goalSelect.value == 'Maintain Weight') {
+        console.log("Your goal is to maintain weight");
+    } else if (goalSelect.value == 'Lose Weight') {
+        console.log("Your goal is to lose weight")
+    } else if (goalSelect.value == "Gain Weight") {
+        console.log('Your goal is to Gain Weight');
+    }
+}
 
 //Display calculated BMR when button is clicked
 function calculate() {
