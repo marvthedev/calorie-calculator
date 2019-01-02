@@ -32,7 +32,7 @@ let count;
 let activity, tdee;
 
 //Variable for storing goal value
-let goal, goalCalories;
+let goal, goalCalories, maintainCals, loseCals, gainCals;
 
 // Load event listeners
 loadEventListeners();
@@ -46,7 +46,7 @@ function loadEventListeners() {
     weight[0].addEventListener('click', selectWeight);
     weight[1].addEventListener('click', selectWeight);
     calcButton.addEventListener('click', calculate);
-    goalSelect.addEventListener('change', goalChanger);
+    goalSelect.addEventListener('change', goalSpecific);
     for (count = 0; count < activitySelect.length; count++) {
         activitySelect[count].addEventListener('click', activityLevel);
     }
@@ -113,6 +113,7 @@ function calcByGender(e) {
     lbsToKg();
     selectHeight();
     selectWeight();
+    goalSpecific();
     if (gender[0].checked) {
         calcBMR = (9.99 * weightKilos) + (6.25 * heightCM) - (4.92 * age) - 161;
     } else if (gender[1].checked) {
@@ -120,28 +121,37 @@ function calcByGender(e) {
     }
 }
 
-function goalChanger() {
+// function goalSpecific() {
+//     if (goalSelect.value == 'Maintain Weight') {
+//         goalCalories = (calcBMR * activity) - tdee;
+//     } else if (goalSelect.value == 'Lose Weight') {
+//         goalCalories = -750;
+//     } else if (goalSelect.value == "Gain Weight") {
+//         goalCalories = 350;
+//     }
+// }
+
+function goalSpecific() {
+    activityLevel();
+    tdee = calcBMR * activity;
     if (goalSelect.value == 'Maintain Weight') {
-        goalCalories = tdee;
+        goal = tdee;
     } else if (goalSelect.value == 'Lose Weight') {
-        goalCalories = 750;
+        goal = tdee - 750;
     } else if (goalSelect.value == "Gain Weight") {
-        goalCalories = 350;
+        goal = tdee + 350;
     }
+}
+
+function results() {
+    goalSpecific();
+    bmrInput.value = Math.round(calcBMR);
+    tdeeInput.value = Math.round(tdee);
+    goalInput.value = Math.round(goal);
 }
 
 //Display calculated BMR when button is clicked
 function calculate() {
     calcByGender();
-    bmrInput.value = Math.round(calcBMR);
-    tdee = calcBMR * activity;
-    tdeeInput.value = Math.round(tdee);
-    goal = tdee + goalCalories;
-    goalInput.value = Math.round(goal);
-    console.log("Your weight in kilos is " + weightKilos);
-    console.log("Your weight in pounds is " + lbsInput.value)
-    console.log("Your height in cm " + heightCM);
-    console.log("Your height in inches " + totalInches);
-    console.log("Your age is " + ageInput.value);
-    console.log("Your BMR is " + Math.round(calcBMR));
+    results();  
 }
