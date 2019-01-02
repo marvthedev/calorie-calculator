@@ -14,24 +14,43 @@ const weight = document.getElementsByName('weight');
 const ageInput = document.getElementById('age-input');
 const bmrInput = document.getElementById('bmr-input');
 const goalSelect = document.getElementById('goal-select');
+const goalInput = document.getElementById('goal-input');
+const activitySelect = document.getElementsByName('activity');
+const tdeeInput = document.getElementById('tdee-input');
 
 //Height Global Variables
-let heightCM;
-let feetToInches;
-let totalInches;
-let inchesToCm;
-let toNumb;
+let heightCM, feetToInches, totalInches, inchesToCm, toNumb;
 
 //Weight Global Variables
-let poundsToKilos;
-let weightKilos;
+let poundsToKilos, weightKilos, calcBMR;
 const age = ageInput.value;
-let calcBMR;
 
-//Additional calories to be added to total calories
+//Counter variable
+let count;
+
+//Activity Level and tdee global variable
+let activity, tdee;
+
+//Variable for storing goal value
+let goal, goalCalories;
 
 // Load event listeners
 loadEventListeners();
+
+// Function to load event listeners
+function loadEventListeners() {
+    gender[0].addEventListener('click', calcByGender);
+    gender[1].addEventListener('click', calcByGender);
+    height[0].addEventListener('click', selectHeight);
+    height[1].addEventListener('click', selectHeight);
+    weight[0].addEventListener('click', selectWeight);
+    weight[1].addEventListener('click', selectWeight);
+    calcButton.addEventListener('click', calculate);
+    goalSelect.addEventListener('change', goalChanger);
+    for (count = 0; count < activitySelect.length; count++) {
+        activitySelect[count].addEventListener('click', activityLevel);
+    }
+}
 
 //Convert height if it's not in cm
 function feetInchToCm() {
@@ -79,16 +98,13 @@ function selectWeight() {
     }
 }
 
-// Function to load event listeners
-function loadEventListeners() {
-    gender[0].addEventListener('click', calcByGender);
-    gender[1].addEventListener('click', calcByGender);
-    height[0].addEventListener('click', selectHeight);
-    height[1].addEventListener('click', selectHeight);
-    weight[0].addEventListener('click', selectWeight);
-    weight[1].addEventListener('click', selectWeight);
-    calcButton.addEventListener('click', calculate);
-    goalSelect.addEventListener('change', goalChanger);
+// This function will store the chosen activity level in a variable "activity"
+function activityLevel() {
+    for (count = 0; count < activitySelect.length; count++) {
+        if (activitySelect[count].checked) {
+            activity = activitySelect[count].value;
+        }
+    }
 }
 
 //Formula to calculate BMR based on gender
@@ -106,11 +122,11 @@ function calcByGender(e) {
 
 function goalChanger() {
     if (goalSelect.value == 'Maintain Weight') {
-        console.log("Your goal is to maintain weight");
+        goalCalories = tdee;
     } else if (goalSelect.value == 'Lose Weight') {
-        console.log("Your goal is to lose weight")
+        goalCalories = 750;
     } else if (goalSelect.value == "Gain Weight") {
-        console.log('Your goal is to Gain Weight');
+        goalCalories = 350;
     }
 }
 
@@ -118,6 +134,10 @@ function goalChanger() {
 function calculate() {
     calcByGender();
     bmrInput.value = Math.round(calcBMR);
+    tdee = calcBMR * activity;
+    tdeeInput.value = Math.round(tdee);
+    goal = tdee + goalCalories;
+    goalInput.value = Math.round(goal);
     console.log("Your weight in kilos is " + weightKilos);
     console.log("Your weight in pounds is " + lbsInput.value)
     console.log("Your height in cm " + heightCM);

@@ -26,7 +26,6 @@ h2 {
     text-transform: uppercase;
 }
 
-
 .flex-container {
     display: flex;
     flex-direction: column;
@@ -83,7 +82,8 @@ h2 {
 /* Style input boxes */
 .height-input input,
 .weight-input input,
-#age-input {
+#age-input,
+#goal-input {
     width: 50px;
     text-align: center;
 }
@@ -123,16 +123,20 @@ h2 {
     font-size: 1.5rem;
 }
 
+.results-box p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.results-box input {
+    margin: 0 5px;
+}
+
 #bmr-input,
 #tdee-input {
     margin-top: 10px;
     width: 80px;
     text-align: center;
-}
-
-p {
-    text-align: center;
-    margin-top: 10px;
 }
 
 .tdee-result,
