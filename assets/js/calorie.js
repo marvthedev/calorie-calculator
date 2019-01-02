@@ -23,7 +23,8 @@ let heightCM, feetToInches, totalInches, inchesToCm, toNumb;
 
 //Weight Global Variables
 let poundsToKilos, weightKilos, calcBMR;
-const age = ageInput.value;
+
+let age;
 
 //Counter variable
 let count;
@@ -114,9 +115,11 @@ function calcByGender(e) {
     selectHeight();
     selectWeight();
     goalSpecific();
+    age = ageInput.value;
     if (gender[0].checked) {
         calcBMR = (9.99 * weightKilos) + (6.25 * heightCM) - (4.92 * age) - 161;
     } else if (gender[1].checked) {
+        console.log(age);
         calcBMR = (9.99 * weightKilos) + (6.25 * heightCM) - (4.92 * age) + 5;
     }
 }
@@ -153,5 +156,6 @@ function results() {
 //Display calculated BMR when button is clicked
 function calculate() {
     calcByGender();
-    results();  
+    results(); 
+    console.log(gender[1]);
 }
